@@ -11,6 +11,11 @@
 <title>Welcome~</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script>
+	function checkAddProduct(){
+		alert("상품 등록");
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="./menu.jsp" />
@@ -22,7 +27,7 @@
 	</div>
 	<div class="container">
 		<form action="./processAddProduct.jsp" method="post"
-			  encType="multipart/form-data">
+			  encType="multipart/form-data" name="newProduct">
 			<div class="form-group row">
 				<label class="col-sm-2">상품 코드</label>
 				<div class="col-sm-3">
@@ -82,7 +87,8 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-3">
-					<input type="submit" value="등록" class="btn btn-primary">
+					<input type="button" value="등록" 
+						class="btn btn-primary" onclick="checkAddProduct()">
 				</div>
 			</div>
 			
