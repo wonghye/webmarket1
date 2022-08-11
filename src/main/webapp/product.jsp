@@ -12,10 +12,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
-<jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session" />
+<%-- <jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session" /> --%>
 <%
 	String id = request.getParameter("id");
 	//dao 상세 보기 메서드 호출
+	ProductRepository productDAO = ProductRepository.getInstance();
 	Product product = productDAO.getProductById(id);
 %>
 <body>
@@ -30,7 +31,7 @@
 	<div class="container">
 		<div class="row" align="center">
 			<div class="col-md-5">
-				<img src="./resources/images/<%=product.getFilename() %> " 
+				<img src="./upload/<%=product.getProductImage() %> " 
 				     style="width: 100%">
 			</div>
 			<div class="col-md-6">
