@@ -13,35 +13,38 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session" />
+<%
+	String id = request.getParameter("id");
+	//dao 상세 보기 메서드 호출
+	Product product = productDAO.getProductById(id);
+%>
 <body>
 	<%-- <%@ include file="./menu.jsp" %> --%>
 	<jsp:include page="./menu.jsp" />
 	
 	<div class="jumbotron">
 		<div class="container">
-			<h1 class="display-3">상품 목록</h1>
+			<h1 class="display-3">상품 정보</h1>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row" align="center">
-		<%
-			//ProductRepository productDAO = new ProductRepository();
-			ArrayList<Product> listOfProducts = productDAO.getAllProducts();
-			
-			for(int i=0; i<listOfProducts.size(); i++){
-				Product product = listOfProducts.get(i);
-		%>
-			<div class="col-md-4">
-				<img src="./resources/images/<%=product.getFilename() %>" style="width:100%">
-				<h3><%=product.getPname() %></h3>
-				<p><%=product.getDescription() %>
-				<p><%=product.getUnitPrice() %>
-				<p><a href="./product.jsp?id=<%=product.getProductId() %>" 
-				   class="btn btn-secondary" role="button">상세 정보 &raquo;</a>
+			<div class="col-md-5">
+				<img src="./resources/images/<%=product.getFilename() %> " 
+				     style="width: 100%">
 			</div>
-		<%
-			}
-		%>
+			<div class="col-md-6">
+				<h3><%=product.getPname() %></h3>
+				<p><%=product.getDescription() %></p>
+				<p><b>상품 코드: </b> <span class="badge badge-danger">
+					 			<%=product.getProductId() %></span></p>
+				<p><b>제조사: </b><%=product.getManufacturer() %></p>
+				<p><b>분류: </b><%=product.getCategory() %></p>
+				<p><b>재고수: </b><%=product.getUnitsInStock() %></p>
+				<p><%=product.getUnitPrice() %>원</p>
+				<p><a href="./products.jsp"
+				      class="btn btn-secondary">상품 목록 &raquo;</a> </p>
+			</div>
 		</div>
 	</div>
 	<%-- <%@ include file="./footer.jsp" %> --%>

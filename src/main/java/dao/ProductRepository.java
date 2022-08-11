@@ -44,6 +44,20 @@ public class ProductRepository {
 	public ArrayList<Product> getAllProducts(){
 		return listOfProducts;
 	}
+	
+	//상세 보기
+	public Product getProductById(String productId) {
+		Product productById = null;  //이름이 다른 객체 선언
+		for(int i=0; i<listOfProducts.size(); i++) {
+			Product product = listOfProducts.get(i);
+			String dbProductId = product.getProductId(); //이미 등록된 id
+			if(dbProductId.equals(productId)) { //외부에서 전달된 id와 같으면
+				productById = product; //아이디가 같은 상품을 저장
+				break;
+			}
+		}
+		return productById;
+	}
 }
 
 
