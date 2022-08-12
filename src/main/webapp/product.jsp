@@ -1,9 +1,10 @@
-<%@page import="vo.Product"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="dao.ProductRepository"%>
+<%@ page import="vo.Product"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="dao.ProductRepository"%>
 <%@ page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page errorPage="exceptionNoProductId.jsp" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,16 @@
 	ProductRepository productDAO = ProductRepository.getInstance();
 	Product product = productDAO.getProductById(id);
 %>
+<script type="text/javascript">
+	function addToCart() {
+		let form = document.addForm;
+		if(confirm("상품을 장바구니에 추가하시겠습니까?")){
+			form.submit();
+		}else{
+			form.reset();
+		}
+	}
+</script>
 <body>
 	<%-- <%@ include file="./menu.jsp" %> --%>
 	<jsp:include page="./menu.jsp" />
@@ -43,8 +54,12 @@
 				<p><b>분류: </b><%=product.getCategory() %></p>
 				<p><b>재고수: </b><%=product.getUnitsInStock() %></p>
 				<p><%=product.getUnitPrice() %>원</p>
-				<p><a href="./products.jsp"
-				      class="btn btn-secondary">상품 목록 &raquo;</a> </p>
+				<p>
+					<form action="./addCart.jsp?id=<%=product.getProductId() %>"  method="post" name="addForm">
+						<a href="#" onclick="addToCart()" class="btn btn-info">상품 주문 &raquo;</a>
+						<a href="./cart.jsp" class="btn btn-warning">장바구니 &raquo;</a>
+						<a href="./products.jsp" class="btn btn-secondary">상품 목록 &raquo;</a> 
+					</form>
 			</div>
 		</div>
 	</div>
